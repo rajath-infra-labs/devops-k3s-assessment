@@ -68,3 +68,56 @@ replicaset.apps/open-webui-redis-c47dbfbcd       1         1         1       133
 NAME                          READY   AGE
 statefulset.apps/open-webui   1/1     133m
 
+---------------
+
+debugging
+got syntax error in yaml file, changes usage of space to tab.
+it do nothave ocid complete requirement like id, password,domain name in issuer so after opening the web it will should crashloopback off .currently everything was in running state after using tab so no fix needed for pod.
+
+used log checking command while debugging.
+
+also below is all command used history:
+history
+    1  apt update && apt upgrade -y
+    2  curl -fsSL https://get.docker.com | sh
+    3  sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+    4  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    5  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    6  sudo apt update
+    7  sudo apt install -y docker-ce docker-ce-cli containerd.io
+    8  sudo systemctl start docker
+    9  sudo systemctl enable docker
+   10  sudo usermod -aG docker $USER
+   11  newgrp docker
+   12  docker version
+   13  docker ps
+   14  curl -sfL https://get.k3s.io | sh -
+   15  sudo systemctl status k3s
+   16  mkdir -p $HOME/.kube
+   17  sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+   18  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   19  kubectl get nodes
+   20  kubectl get pods -A
+   21  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+   22  helm repo add open-webui https://helm.openwebui.com/
+   23  helm repo update
+   24  helm install --dry-run --debug webui open-webui/open-webui --namespace openwebui --set service.type=ClusterIP
+   25  kubectl get all -n openwebui
+   26  kubectl create namespace openwebui
+   27  helm install webui open-webui/open-webui --namespace openwebui --set service.type=ClusterIP
+   28  kubectl create namespace openwebui
+   29  helm install webui open-webui/open-webui --namespace openwebui --set service.type=ClusterIP
+   30  kubectl create namespace openwebui
+   31  kubectl get all -n openwebui
+   32  kubectl get nodes
+   33  docker version
+   34  docker ps
+   35  exit
+   36  ls
+   37  exit
+   38  du
+   39  kubectl get nodes
+   40  helm install webui open-webui/open-webui --namespace openwebui --set service.type=ClusterIP
+   41  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+   42  history
+
